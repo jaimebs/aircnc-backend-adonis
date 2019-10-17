@@ -17,4 +17,6 @@
 const Route = use('Route');
 
 Route.post('/login', 'SessionController.login');
+
+Route.get('/users', 'UserController.index').middleware(['auth']);
 Route.post('/users', 'UserController.store').middleware(['auth']);
