@@ -18,11 +18,17 @@ adonis new yardstick --api-only
 
 or manually clone the repo and then run `npm install`.
 
-
 ### Migrations
 
 Run the following command to run startup migrations.
 
 ```js
 adonis migration:run
+```
+
+### Delete and Reset ids in the table
+
+```
+delete from table
+ALTER SEQUENCE table_id_seq RESTART WITH 1
 ```
