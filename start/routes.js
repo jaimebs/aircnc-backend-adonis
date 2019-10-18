@@ -16,12 +16,16 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
+// Route.get('/users', 'UserController.index').middleware(['auth']);
+// Route.get('/users/:id', 'UserController.show').middleware(['auth']);
+// Route.post('/users', 'UserController.store').middleware(['auth']);
+
 Route.post('/login', 'SessionController.login');
 
-Route.get('/users', 'UserController.index').middleware(['auth']);
-Route.get('/users/:id', 'UserController.show').middleware(['auth']);
-Route.post('/users', 'UserController.store').middleware(['auth']);
+Route.resource('users', 'UserController')
+  .apiOnly()
+  .middleware(['auth']);
 
-Route.get('/spots', 'SpotController.index').middleware(['auth']);
-Route.get('/spots/:id', 'SpotController.show').middleware(['auth']);
-Route.post('/spots', 'SpotController.store').middleware(['auth']);
+Route.resource('spots', 'SpotController')
+  .apiOnly()
+  .middleware(['auth']);

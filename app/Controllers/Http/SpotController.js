@@ -13,11 +13,11 @@ class SpotController {
     return spots;
   }
 
-  async store({ request, response }) {
-    const { user_id } = request.headers();
+  async store({ request, auth }) {
+    const { id } = auth.user;
     const { company, price, techs } = request.all();
     const data = {
-      user_id,
+      user_id: id,
       company,
       price,
       techs
@@ -28,8 +28,11 @@ class SpotController {
     return spot;
   }
 
-  async show({ params, response }) {
-    const spot = await Spot.find(params.id);
+  async show({ params }) {
+    const spot = await Spot.query()
+      .with('user')
+      .where('id', params.id)
+      .first();
 
     return spot;
   }
