@@ -21,6 +21,7 @@ const Route = use('Route');
 // Route.post('/users', 'UserController.store').middleware(['auth']);
 
 Route.post('/login', 'SessionController.login');
+Route.get('/dashboard', 'DashboardController.show').middleware(['auth']);
 
 Route.resource('users', 'UserController')
   .apiOnly()

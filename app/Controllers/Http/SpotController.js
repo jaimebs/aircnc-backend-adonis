@@ -1,10 +1,9 @@
 'use strict';
-
-const Spot = use('App/Models/Spot');
-
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
+
+const Spot = use('App/Models/Spot');
 
 class SpotController {
   async index() {
