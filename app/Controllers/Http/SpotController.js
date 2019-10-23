@@ -43,10 +43,9 @@ class SpotController {
   }
 
   async show({ params }) {
-    const spot = await Spot.query()
-      .with('user')
-      .where('id', params.id)
-      .first();
+    const spot = await Spot.findOrFail(params.id);
+
+    await spot.load('user');
 
     return spot;
   }

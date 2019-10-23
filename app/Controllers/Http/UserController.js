@@ -18,10 +18,21 @@ class UserController {
   }
 
   async show({ params }) {
-    const user = await User.query()
-      .with('spots')
-      .where('id', params.id)
-      .first();
+    const user = await User.findOrFail(params.id);
+
+    await user.load('spots');
+
+    return user;
+  }
+
+  async update({ params, request }) {
+    const user = await User.findOrFail(params.id);
+
+    const data = request.only(['username', 'email', 'password']);
+
+    user.merge(data);
+
+    await user.save();
 
     return user;
   }
